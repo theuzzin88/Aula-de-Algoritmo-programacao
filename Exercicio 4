@@ -1,0 +1,27 @@
+#include <stdio.h>
+
+int main(){
+    
+    float bonus;
+    char experiencia;
+
+    //Char sempre vai ser primeiro pra n bugar//
+    scanf("%c", &experiencia);
+    scanf("%f", &bonus);
+
+    if(experiencia == 'a'){
+        bonus = bonus + (0.05 * bonus);
+        printf("R$ %.2f\n", bonus);
+    }
+    else if(experiencia == 'b'){
+        bonus = bonus + (0.07 * bonus);
+        printf("R$ %.2f\n", bonus);
+    }
+    else if(experiencia == 'c'){
+        bonus = bonus + (0.08 * bonus);
+        printf("R$ %.2f\n", bonus);
+    }
+
+
+     return 0;
+}
