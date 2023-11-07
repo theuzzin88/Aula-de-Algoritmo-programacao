@@ -1,39 +1,122 @@
 #include <stdio.h>
+#include <string.h>
 
-float calcularForcaPonderada(int forcaGoleiro, int forcaLaterais[], int forcaZagueiros[], int forcaVolantes[], int forcaMeias[], int forcaAtacantes[]) {
-    float forca = (8 * forcaGoleiro + 10 * (forcaLaterais[0] + forcaLaterais[1]) + 5 * (forcaZagueiros[0] + forcaZagueiros[1]) +
-                  8 * (forcaVolantes[0] + forcaVolantes[1]) + 11 * (forcaMeias[0] + forcaMeias[1]) + 12 * (forcaAtacantes[0] + forcaAtacantes[1])) / 100.0;
+float calcularForcaPonderada(int forcaJogadores[][2]) {
+    float forca = (8 * forcaJogadores[0][0] + 10 * (forcaJogadores[1][0] + forcaJogadores[1][1]) +
+                  5 * (forcaJogadores[2][0] + forcaJogadores[2][1]) +
+                  8 * (forcaJogadores[3][0] + forcaJogadores[3][1]) +
+                  11 * (forcaJogadores[4][0] + forcaJogadores[4][1]) +
+                  12 * (forcaJogadores[5][0] + forcaJogadores[5][1])) / 100.0;
     return forca;
 }
 
 int main() {
-    int forcaTime1 = 0, forcaTime2 = 0;
+    int forcaJogadoresTime1[6][2] = {0}; 
+    int forcaJogadoresTime2[6][2] = {0}; 
     char nomeTime1[31], nomeTime2[31];
 
-    int forcaGoleiroTime1, forcaLateraisTime1[2], forcaZagueirosTime1[2], forcaVolantesTime1[2], forcaMeiasTime1[2], forcaAtacantesTime1[2];
-    int forcaGoleiroTime2, forcaLateraisTime2[2], forcaZagueirosTime2[2], forcaVolantesTime2[2], forcaMeiasTime2[2], forcaAtacantesTime2[2];
-
     scanf("%30s", nomeTime1);
-    scanf("%d", &forcaGoleiroTime1, &forcaLateraisTime1[0], &forcaLateraisTime1[1],
-          &forcaZagueirosTime1[0], &forcaZagueirosTime1[1], &forcaVolantesTime1[0], &forcaVolantesTime1[1],
-          &forcaMeiasTime1[0], &forcaMeiasTime1[1], &forcaAtacantesTime1[0], &forcaAtacantesTime1[1]);
+
+    for (int i = 0; i < 11; i++) {
+        char nome[31];
+        char posicao;
+        int forca;
+        scanf("%30[^;];%c;%d", nome, &posicao, &forca);
+
+        if (posicao == 'G') {
+            forcaJogadoresTime1[0][0] = forca;
+        } else if (posicao == 'L') {
+            if (forcaJogadoresTime1[1][0] == 0) {
+                forcaJogadoresTime1[1][0] = forca;
+            } else {
+                forcaJogadoresTime1[1][1] = forca;
+            }
+        } else if (posicao == 'Z') {
+            if (forcaJogadoresTime1[2][0] == 0) {
+                forcaJogadoresTime1[2][0] = forca;
+            } else {
+                forcaJogadoresTime1[2][1] = forca;
+            }
+        } else if (posicao == 'V') {
+            if (forcaJogadoresTime1[3][0] == 0) {
+                forcaJogadoresTime1[3][0] = forca;
+            } else {
+                forcaJogadoresTime1[3][1] = forca;
+            }
+        } else if (posicao == 'M') {
+            if (forcaJogadoresTime1[4][0] == 0) {
+                forcaJogadoresTime1[4][0] = forca;
+            } else {
+                forcaJogadoresTime1[4][1] = forca;
+            }
+        } else if (posicao == 'A') {
+            if (forcaJogadoresTime1[5][0] == 0) {
+                forcaJogadoresTime1[5][0] = forca;
+            } else {
+                forcaJogadoresTime1[5][1] = forca;
+            }
+        }
+    }
+
 
     scanf("%30s", nomeTime2);
 
-    scanf("%d", &forcaGoleiroTime2, &forcaLateraisTime2[0], &forcaLateraisTime2[1],
-          &forcaZagueirosTime2[0], &forcaZagueirosTime2[1], &forcaVolantesTime2[0], &forcaVolantesTime2[1],
-          &forcaMeiasTime2[0], &forcaMeiasTime2[1], &forcaAtacantesTime2[0], &forcaAtacantesTime2[1]);
 
-    forcaTime1 = calcularForcaPonderada(forcaGoleiroTime1, forcaLateraisTime1, forcaZagueirosTime1, forcaVolantesTime1, forcaMeiasTime1, forcaAtacantesTime1);
-    forcaTime2 = calcularForcaPonderada(forcaGoleiroTime2, forcaLateraisTime2, forcaZagueirosTime2, forcaVolantesTime2, forcaMeiasTime2, forcaAtacantesTime2);
+    for (int i = 0; i < 11; i++) {
+        char nome[31];
+        char posicao;
+        int forca;
+        scanf("%30[^;];%c;%d", nome, &posicao, &forca);
+
+        if (posicao == 'G') {
+            forcaJogadoresTime2[0][0] = forca;
+        } else if (posicao == 'L') {
+            if (forcaJogadoresTime2[1][0] == 0) {
+                forcaJogadoresTime2[1][0] = forca;
+            } else {
+                forcaJogadoresTime2[1][1] = forca;
+            }
+        } else if (posicao == 'Z') {
+            if (forcaJogadoresTime2[2][0] == 0) {
+                forcaJogadoresTime2[2][0] = forca;
+            } else {
+                forcaJogadoresTime2[2][1] = forca;
+            }
+        } else if (posicao == 'V') {
+            if (forcaJogadoresTime2[3][0] == 0) {
+                forcaJogadoresTime2[3][0] = forca;
+            } else {
+                forcaJogadoresTime2[3][1] = forca;
+            }
+        } else if (posicao == 'M') {
+            if (forcaJogadoresTime2[4][0] == 0) {
+                forcaJogadoresTime2[4][0] = forca;
+            } else {
+                forcaJogadoresTime2[4][1] = forca;
+            }
+        } else if (posicao == 'A') {
+            if (forcaJogadoresTime2[5][0] == 0) {
+                forcaJogadoresTime2[5][0] = forca;
+            } else {
+                forcaJogadoresTime2[5][1] = forca;
+            }
+        }
+    }
+
+
+    float forcaTime1 = calcularForcaPonderada(forcaJogadoresTime1);
+    float forcaTime2 = calcularForcaPonderada(forcaJogadoresTime2);
+
 
     printf("%s: %.2f de forca\n", nomeTime1, forcaTime1);
     printf("%s: %.2f de forca\n", nomeTime2, forcaTime2);
+
 
     if (forcaTime1 > forcaTime2) {
         printf("%s eh mais forte\n", nomeTime1);
     } else if (forcaTime2 > forcaTime1) {
         printf("%s eh mais forte\n", nomeTime2);
     }
+
     return 0;
 }
