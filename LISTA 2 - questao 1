@@ -1,0 +1,40 @@
+#include <stdio.h>
+
+void generateNewSet(int arr[], int n) {
+    int new_arr[n / 2];
+    for (int i = 0, j = 0; i < n; i += 2, j++) {
+        new_arr[j] = arr[i] + arr[i + 1];
+    }
+
+    for (int i = 0; i < n / 2; i++) {
+        arr[i] = new_arr[i];
+    }
+}
+
+int main() {
+    int values[10];
+    for (int i = 0; i < 10; i++) {
+        scanf("%d", &values[i]);
+    }
+
+    int n = 10;
+
+    while (n > 0) {
+        for (int i = 0; i < n; i++) {
+            printf("%d", values[i]);
+            if (i < n - 1) {
+                printf(" ");
+            }
+        }
+        printf("\n");
+
+        if (n == 1) {
+            break;
+        }
+
+        generateNewSet(values, n);
+        n = n / 2;
+    }
+
+    return 0;
+}
