@@ -1,0 +1,39 @@
+#include <stdio.h>
+
+float calcularForcaPonderada(int forcaGoleiro, int forcaLaterais[], int forcaZagueiros[], int forcaVolantes[], int forcaMeias[], int forcaAtacantes[]) {
+    float forca = (8 * forcaGoleiro + 10 * (forcaLaterais[0] + forcaLaterais[1]) + 5 * (forcaZagueiros[0] + forcaZagueiros[1]) +
+                  8 * (forcaVolantes[0] + forcaVolantes[1]) + 11 * (forcaMeias[0] + forcaMeias[1]) + 12 * (forcaAtacantes[0] + forcaAtacantes[1])) / 100.0;
+    return forca;
+}
+
+int main() {
+    int forcaTime1 = 0, forcaTime2 = 0;
+    char nomeTime1[31], nomeTime2[31];
+
+    int forcaGoleiroTime1, forcaLateraisTime1[2], forcaZagueirosTime1[2], forcaVolantesTime1[2], forcaMeiasTime1[2], forcaAtacantesTime1[2];
+    int forcaGoleiroTime2, forcaLateraisTime2[2], forcaZagueirosTime2[2], forcaVolantesTime2[2], forcaMeiasTime2[2], forcaAtacantesTime2[2];
+
+    scanf("%30s", nomeTime1);
+    scanf("%d", &forcaGoleiroTime1, &forcaLateraisTime1[0], &forcaLateraisTime1[1],
+          &forcaZagueirosTime1[0], &forcaZagueirosTime1[1], &forcaVolantesTime1[0], &forcaVolantesTime1[1],
+          &forcaMeiasTime1[0], &forcaMeiasTime1[1], &forcaAtacantesTime1[0], &forcaAtacantesTime1[1]);
+
+    scanf("%30s", nomeTime2);
+
+    scanf("%d", &forcaGoleiroTime2, &forcaLateraisTime2[0], &forcaLateraisTime2[1],
+          &forcaZagueirosTime2[0], &forcaZagueirosTime2[1], &forcaVolantesTime2[0], &forcaVolantesTime2[1],
+          &forcaMeiasTime2[0], &forcaMeiasTime2[1], &forcaAtacantesTime2[0], &forcaAtacantesTime2[1]);
+
+    forcaTime1 = calcularForcaPonderada(forcaGoleiroTime1, forcaLateraisTime1, forcaZagueirosTime1, forcaVolantesTime1, forcaMeiasTime1, forcaAtacantesTime1);
+    forcaTime2 = calcularForcaPonderada(forcaGoleiroTime2, forcaLateraisTime2, forcaZagueirosTime2, forcaVolantesTime2, forcaMeiasTime2, forcaAtacantesTime2);
+
+    printf("%s: %.2f de forca\n", nomeTime1, forcaTime1);
+    printf("%s: %.2f de forca\n", nomeTime2, forcaTime2);
+
+    if (forcaTime1 > forcaTime2) {
+        printf("%s eh mais forte\n", nomeTime1);
+    } else if (forcaTime2 > forcaTime1) {
+        printf("%s eh mais forte\n", nomeTime2);
+    }
+    return 0;
+}
