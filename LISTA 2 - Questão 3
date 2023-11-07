@@ -22,16 +22,12 @@ int main() {
     int matrizB[4][4];
     int resultado[4][4];
 
-    // Leitura da matriz A
     lerMatriz(matrizA);
 
-    // Leitura da matriz B
     lerMatriz(matrizB);
 
     char operacao[5];
     scanf("%s", operacao);
-
-    // Realiza a operação
     for (int i = 0; i < 4; i++) {
         for (int j = 0; j < 4; j++) {
             if (operacao[0] == 's') {
@@ -46,9 +42,6 @@ int main() {
             }
         }
     }
-
-    // Exibe a matriz resultante com justificação à direita
     imprimirMatriz(resultado);
-
     return 0;
 }
