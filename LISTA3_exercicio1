@@ -2,49 +2,42 @@
 #include <stdlib.h>
 #include <string.h>
 
+int value(char roman) {
+    if (roman == 'I')
+        return 1;
+    if (roman == 'V')
+        return 5;
+    if (roman == 'X')
+        return 10;
+    if (roman == 'L')
+        return 50;
+    if (roman == 'C')
+        return 100;
+    if (roman == 'D')
+        return 500;
+    if (roman == 'M')
+        return 1000;
+    return -1;
+}
+
 int roman_to_decimal(char roman_num[]) {
     int decimal = 0;
     int i;
 
-    for (i = 0; roman_num[i] != '\0'; i++) {
-        if (roman_num[i] == 'M') {
-            decimal += 1000;
-        } else if (roman_num[i] == 'D') {
-            decimal += 500;
-        } else if (roman_num[i] == 'C') {
-            if (roman_num[i + 1] == 'M') {
-                decimal += 900;
-                i++;
-            } else if (roman_num[i + 1] == 'D') {
-                decimal += 400;
-                i++;
+    for (i = 0; i < strlen(roman_num); i++) {
+        int s1 = value(roman_num[i]);
+
+        if (i + 1 < strlen(roman_num)) {
+            int s2 = value(roman_num[i + 1]);
+
+            if (s1 >= s2) {
+                decimal = decimal + s1;
             } else {
-                decimal += 100;
+                decimal = decimal + s2 - s1;
+                i++;
             }
-        } else if (roman_num[i] == 'L') {
-            decimal += 50;
-        } else if (roman_num[i] == 'X') {
-            if (roman_num[i + 1] == 'C') {
-                decimal += 90;
-                i++;
-            } else if (roman_num[i + 1] == 'L') {
-                decimal += 40;
-                i++;
-            } else {
-                decimal += 10;
-            }
-        } else if (roman_num[i] == 'V') {
-            decimal += 5;
-        } else if (roman_num[i] == 'I') {
-            if (roman_num[i + 1] == 'X') {
-                decimal += 9;
-                i++;
-            } else if (roman_num[i + 1] == 'V') {
-                decimal += 4;
-                i++;
-            } else {
-                decimal += 1;
-            }
+        } else {
+            decimal = decimal + s1;
         }
     }
 
@@ -60,6 +53,10 @@ void decimal_to_binary(int decimal, char binary[]) {
         i++;
     }
 
+    if (i == 0) {
+        binary[i++] = '0';  // Handle case when decimal is 0
+    }
+
     binary[i] = '\0';
 
     int j;
@@ -72,18 +69,21 @@ void decimal_to_binary(int decimal, char binary[]) {
 
 void decimal_to_hexadecimal(int decimal, char hexadecimal[]) {
     int i = 0;
-
     while (decimal > 0) {
         int remainder = decimal % 16;
 
         if (remainder < 10) {
             hexadecimal[i] = remainder + '0';
         } else {
-            hexadecimal[i] = remainder + 55;
+            hexadecimal[i] = remainder - 10 + 'a';
         }
 
         decimal /= 16;
         i++;
+    }
+
+    if (i == 0) {
+        hexadecimal[i++] = '0';  // Handle case when decimal is 0
     }
 
     hexadecimal[i] = '\0';
@@ -106,9 +106,9 @@ int main() {
     char hexadecimal[5];
     decimal_to_hexadecimal(decimal, hexadecimal);
 
-    printf("%s\n I na base 2: ", binary);
-    printf("%d\n I na base 10: ", decimal);
-    printf("%s\n I na base 16: ", hexadecimal);
+    printf("%s na base 2: %s\n", roman_num, binary);
+    printf("%s na base 10: %d\n", roman_num, decimal);
+    printf("%s na base 16: %s\n", roman_num, hexadecimal);
 
     return 0;
 }
