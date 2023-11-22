@@ -2,7 +2,7 @@
 #include <stdlib.h>
 #include <string.h>
 
-int value(char roman) {
+int get_value(char roman) {
     if (roman == 'I')
         return 1;
     if (roman == 'V')
@@ -19,46 +19,38 @@ int value(char roman) {
         return 1000;
     return -1;
 }
-
 int roman_to_decimal(char roman_num[]) {
     int decimal = 0;
     int i;
-
     for (i = 0; i < strlen(roman_num); i++) {
-        int s1 = value(roman_num[i]);
+        int current_value = get_value(roman_num[i]);
 
         if (i + 1 < strlen(roman_num)) {
-            int s2 = value(roman_num[i + 1]);
+            int next_value = get_value(roman_num[i + 1]);
 
-            if (s1 >= s2) {
-                decimal = decimal + s1;
+            if (current_value >= next_value) {
+                decimal = decimal + current_value;
             } else {
-                decimal = decimal + s2 - s1;
+                decimal = decimal + next_value - current_value;
                 i++;
             }
         } else {
-            decimal = decimal + s1;
+            decimal = decimal + current_value;
         }
     }
-
     return decimal;
 }
-
 void decimal_to_binary(int decimal, char binary[]) {
     int i = 0;
-
     while (decimal > 0) {
         binary[i] = decimal % 2 + '0';
         decimal /= 2;
         i++;
     }
-
     if (i == 0) {
-        binary[i++] = '0';  // Handle case when decimal is 0
+        binary[i++] = '0';  
     }
-
     binary[i] = '\0';
-
     int j;
     for (j = 0; j < i / 2; j++) {
         char temp = binary[j];
@@ -66,12 +58,10 @@ void decimal_to_binary(int decimal, char binary[]) {
         binary[i - j - 1] = temp;
     }
 }
-
 void decimal_to_hexadecimal(int decimal, char hexadecimal[]) {
     int i = 0;
     while (decimal > 0) {
         int remainder = decimal % 16;
-
         if (remainder < 10) {
             hexadecimal[i] = remainder + '0';
         } else {
@@ -81,13 +71,10 @@ void decimal_to_hexadecimal(int decimal, char hexadecimal[]) {
         decimal /= 16;
         i++;
     }
-
     if (i == 0) {
-        hexadecimal[i++] = '0';  // Handle case when decimal is 0
+        hexadecimal[i++] = '0';
     }
-
     hexadecimal[i] = '\0';
-
     int j;
     for (j = 0; j < i / 2; j++) {
         char temp = hexadecimal[j];
@@ -97,18 +84,17 @@ void decimal_to_hexadecimal(int decimal, char hexadecimal[]) {
 }
 
 int main() {
-    char roman_num[13];
-    scanf("%s", roman_num);
+    char input_roman_num[13];
+    scanf("%s", input_roman_num);
 
-    int decimal = roman_to_decimal(roman_num);
-    char binary[33];
-    decimal_to_binary(decimal, binary);
-    char hexadecimal[5];
-    decimal_to_hexadecimal(decimal, hexadecimal);
+    int decimal_value = roman_to_decimal(input_roman_num);
+    char binary_representation[33];
+    decimal_to_binary(decimal_value, binary_representation);
+    char hexadecimal_representation[5];
+    decimal_to_hexadecimal(decimal_value, hexadecimal_representation);
 
-    printf("%s na base 2: %s\n", roman_num, binary);
-    printf("%s na base 10: %d\n", roman_num, decimal);
-    printf("%s na base 16: %s\n", roman_num, hexadecimal);
-
+    printf("%s na base 2: %s\n", input_roman_num, binary_representation);
+    printf("%s na base 10: %d\n", input_roman_num, decimal_value);
+    printf("%s na base 16: %s\n", input_roman_num, hexadecimal_representation);
     return 0;
 }
