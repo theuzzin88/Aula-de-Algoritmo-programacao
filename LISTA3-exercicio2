@@ -1,0 +1,17 @@
+#include <stdio.h>
+#include <math.h>
+
+int main() {
+    double A, i, t, V;
+    printf("Enter the initial investment amount (A): ");
+    scanf("%lf", &A);
+    printf("Enter the interest rate (i): ");
+    scanf("%lf", &i);
+    printf("Enter the time period (t): ");
+    scanf("%lf", &t);
+
+    V = A * pow((1 + i), t);
+    printf("The final amount after %lf years is: %lf\n", t, V);
+
+    return 0;
+}
