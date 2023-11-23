@@ -2,35 +2,18 @@
 #include <math.h>
 
 int main() {
-    double A, i, t, V;
-    printf("Enter the initial investment amount (A): ");
-    scanf("%lf", &A);
-    printf("Enter the interest rate (i): ");
-    scanf("%lf", &i);
-    printf("Enter the time period (t): ");
-    scanf("%lf", &t);
+    int meses;
+    double aporte, taxa;
 
-    V = A * pow((1 + i), t);
-    printf("The final amount after %lf years is: %lf\n", t, V);
+    scanf("%d", &meses);
+    scanf("%lf", &aporte);
+    scanf("%lf", &taxa);
 
-    return 0;
-}
-
-#include <stdio.h>
-#include <math.h>
-
-int main() {
-    double A, i, t, V;
-    printf("Digite o valor do investimento inicial (A): ");
-    scanf("%lf", &A);
-    printf("Digite a taxa de juros (i): ");
-    scanf("%lf", &i);
-    printf("Digite o período de tempo (t): ");
-    scanf("%lf", &t);
-
-    V = A * pow((1 + i), t);
-    printf("O valor final após %lf anos é: %lf\n", t, V);
+    int maxMeses = (meses > 120) ? 120 : meses; 
+    for (int i = 1; i <= maxMeses; i++) {
+        double valor = aporte * (1 + taxa) * (pow(1 + taxa, i) - 1) / taxa;
+        printf("Montante ao fim do mes %d: R$ %.2lf\n", i, valor);
+    }
 
     return 0;
 }
-
