@@ -15,3 +15,22 @@ int main() {
 
     return 0;
 }
+
+#include <stdio.h>
+#include <math.h>
+
+int main() {
+    double A, i, t, V;
+    printf("Digite o valor do investimento inicial (A): ");
+    scanf("%lf", &A);
+    printf("Digite a taxa de juros (i): ");
+    scanf("%lf", &i);
+    printf("Digite o período de tempo (t): ");
+    scanf("%lf", &t);
+
+    V = A * pow((1 + i), t);
+    printf("O valor final após %lf anos é: %lf\n", t, V);
+
+    return 0;
+}
+
